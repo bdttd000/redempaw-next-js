@@ -1,3 +1,3 @@
-import FirstEndpoint from "./FirstEndpoint";
+import PrintEndpoint from "./PrintEndpoint";
 
-export { FirstEndpoint };
+export { PrintEndpoint };
