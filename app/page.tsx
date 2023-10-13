@@ -1,14 +1,25 @@
-import { Post, getPostById, getPosts } from '@/lib/data';
+"use client"
+import React, {useState, useEffect} from 'react';
+import { AxiomPosts, Post } from '@/lib/data';
 import { PrintEndpoint } from '@/components'
+import { api } from '@/lib/api';
 
 export default function Home() {
-  const posts: Post[] = getPosts();
-  const post = getPostById('f082af07-3d5d-4b56-b7f9-9d098af4c050') as Post;
+  const [posts, setPosts] = useState<Post[]>();
+
+  useEffect(() => {
+    api.get<AxiomPosts>('/api/example').then((response) => {
+      console.log(response.data);
+      setPosts(response.data.posts)
+    }).catch(error => {
+      console.log(error);
+    });
+  }, []);
 
   return (
-    <main className="overflow-hidden">
+    <main>
       {
-        posts.map(post => {
+        posts ? posts.map(post => {
           return (
             <PrintEndpoint
             id={post.id}
@@ -16,13 +27,8 @@ export default function Home() {
             desc={post.desc}
             />
           )
-        }) 
+        }) : ''
       }
-      <PrintEndpoint
-        id={post.id}
-        title={post.title}
-        desc={post.desc}
-      />
     </main>
   )
 }
