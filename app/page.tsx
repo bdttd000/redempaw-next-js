@@ -1,34 +1,13 @@
-"use client"
-import React, {useState, useEffect} from 'react';
-import { AxiomPosts, Post } from '@/lib/data';
-import { PrintEndpoint } from '@/components'
-import { api } from '@/lib/api';
+import { randomUUID } from "crypto";
+import React from "react";
+import prisma from "@/prisma/db";
 
-export default function Home() {
-  const [posts, setPosts] = useState<Post[]>();
+const users = await prisma.users.findMany();
 
-  useEffect(() => {
-    api.get<AxiomPosts>('/api/example').then((response) => {
-      console.log(response.data);
-      setPosts(response.data.posts)
-    }).catch(error => {
-      console.log(error);
-    });
-  }, []);
+const page = () => {
+  const uuid = randomUUID();
 
-  return (
-    <main>
-      {
-        posts ? posts.map(post => {
-          return (
-            <PrintEndpoint
-            id={post.id}
-            title={post.title}
-            desc={post.desc}
-            />
-          )
-        }) : ''
-      }
-    </main>
-  )
-}
+  return <div>{uuid}</div>;
+};
+
+export default page;
