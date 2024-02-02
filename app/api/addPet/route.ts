@@ -1,6 +1,38 @@
 import prisma from "@/prisma/db";
 import { NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/pet:
+ *   post:
+ *     summary: Add a new pet
+ *     description: Creates a new pet entry with the provided information.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               pet_info_id:
+ *                 type: string
+ *               name:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               directory_url:
+ *                 type: string
+ *               avatar_url:
+ *                 type: string
+ *               city:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Pet successfully added
+ *       500:
+ *         description: Internal Server Error
+ */
+
 export async function POST(req: Request) {
   try {
     const { pet_info_id, name, description, directory_url, avatar_url, city } =

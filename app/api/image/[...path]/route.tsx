@@ -2,6 +2,33 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+/**
+ * Obsługuje żądanie GET w celu pobrania obrazu z serwera na podstawie ścieżki.
+ *
+ * @swagger
+ * /api/images/{path}:
+ *   get:
+ *     summary: Pobierz obraz
+ *     description: Pobiera obraz z serwera na podstawie podanej ścieżki.
+ *     parameters:
+ *       - in: path
+ *         name: path
+ *         required: true
+ *         description: Ścieżka do obrazu
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sukces - zwraca obraz
+ *         content:
+ *           image/jpeg:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       404:
+ *         description: Nie znaleziono obrazu o podanej ścieżce
+ */
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { path: string[] } }

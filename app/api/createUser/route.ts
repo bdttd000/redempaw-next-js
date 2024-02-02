@@ -2,6 +2,44 @@ import prisma from "@/prisma/db";
 import { NextResponse } from "next/server";
 import { hash } from "bcryptjs";
 
+/**
+ * Obsługuje żądanie POST do utworzenia nowego użytkownika.
+ *
+ * @swagger
+ * /api/users:
+ *   post:
+ *     summary: Utwórz nowego użytkownika
+ *     description: Tworzy nowego użytkownika na podstawie przekazanych informacji.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               surname:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password1:
+ *                 type: string
+ *               phone:
+ *                 type: string
+ *               city:
+ *                 type: string
+ *               address:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Użytkownik został pomyślnie utworzony
+ *       400:
+ *         description: Użytkownik o tym adresie e-mail już istnieje
+ *       500:
+ *         description: Wystąpił błąd serwera
+ */
+
 export async function POST(req: Request) {
   try {
     const { name, surname, email, password1, phone, city, address } =

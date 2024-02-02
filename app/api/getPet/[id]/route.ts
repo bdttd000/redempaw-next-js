@@ -1,6 +1,34 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/db";
 
+/**
+ * Obsługuje żądanie GET w celu pobrania informacji o zwierzaku na podstawie jego identyfikatora.
+ *
+ * @swagger
+ * /api/pets/{id}:
+ *   get:
+ *     summary: Pobierz informacje o zwierzaku
+ *     description: Pobiera informacje o zwierzaku na podstawie przekazanego identyfikatora.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Identyfikator zwierzaka
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sukces - zwraca informacje o zwierzaku
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pet'
+ *       404:
+ *         description: Nie znaleziono zwierzaka o podanym identyfikatorze
+ *       500:
+ *         description: Wystąpił błąd serwera
+ */
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }

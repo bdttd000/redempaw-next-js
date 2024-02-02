@@ -1,6 +1,21 @@
 import prisma from "@/prisma/db";
 import { NextRequest, NextResponse } from "next/server";
 
+/**
+ * Obsługuje żądanie GET w celu pobrania listy zwierząt.
+ *
+ * @swagger
+ * /api/pets:
+ *   get:
+ *     summary: Pobierz listę zwierząt
+ *     description: Pobiera listę zwierząt w kolejności malejącej daty utworzenia.
+ *     responses:
+ *       200:
+ *         description: Sukces - zwraca listę zwierząt
+ *       500:
+ *         description: Wystąpił błąd serwera
+ */
+
 export async function GET(req: NextRequest) {
   try {
     const pets = await prisma.pet.findMany({
