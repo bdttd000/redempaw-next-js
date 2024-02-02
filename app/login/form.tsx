@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+"use client";
+import React, { useState } from "react";
 import { Input, Redirect, Submit } from "@/components";
 import { signIn } from "next-auth/react";
 
@@ -25,25 +26,6 @@ const Form = () => {
       redirect: true,
       callbackUrl: "/",
     });
-    // try {
-    //   const res = await fetch("/api/createUser", {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       ...registerData,
-    //     }),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    //   if (!res.ok) {
-    //     setError((await res.json()).error);
-    //     return;
-    //   }
-
-    //   signIn(undefined, { callbackUrl: "/" });
-    // } catch (error: any) {
-    //   setError(error?.message);
-    // }
   };
 
   return (

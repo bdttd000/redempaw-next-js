@@ -1,12 +1,15 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { city } from "@prisma/client";
 import { Input, Redirect, Submit } from "@/components";
 import { signIn } from "next-auth/react";
+import { Suspense } from "react";
 
 const Form = () => {
   const [cities, setCities] = useState<city[]>();
   const [citiesFetched, setCititesFetched] = useState(false);
-  const [registerData, registerDataData] = useState({
+  const [registerData, setRegisterData] = useState({
     name: "",
     surname: "",
     email: "",
@@ -22,7 +25,7 @@ const Form = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    registerDataData((prevData) => ({ ...prevData, [name]: value }));
+    setRegisterData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -76,33 +79,35 @@ const Form = () => {
     >
       {error && <div className="text-red-600 text-xl">{error}</div>}
 
-      <select
-        name="city"
-        className="border-2 outline-none p-2 rounded-lg light-bg input-font w-4/5 lg:w-1/2"
-        onChange={handleInputChange}
-        required
-        disabled={!citiesFetched}
-      >
-        {cities ? (
-          cities.map((city, index) => {
-            const information = (
-              <option selected value="">
-                Wybierz miasto
-              </option>
-            );
-            return (
-              <>
-                {!index ? information : ""}
-                <option key={index} value={city.city_id}>
-                  {city.name}
+      <Suspense>
+        <select
+          name="city"
+          className="border-2 outline-none p-2 rounded-lg light-bg input-font w-4/5 lg:w-1/2"
+          onChange={handleInputChange}
+          required
+          disabled={!citiesFetched}
+        >
+          {cities ? (
+            cities.map((city, index) => {
+              const information = (
+                <option selected value="">
+                  Wybierz miasto
                 </option>
-              </>
-            );
-          })
-        ) : (
-          <option selected>Zaczytywanie miast...</option>
-        )}
-      </select>
+              );
+              return (
+                <>
+                  {!index ? information : ""}
+                  <option key={index} value={city.city_id}>
+                    {city.name}
+                  </option>
+                </>
+              );
+            })
+          ) : (
+            <option selected>Zaczytywanie miast...</option>
+          )}
+        </select>
+      </Suspense>
 
       <Input
         type="text"

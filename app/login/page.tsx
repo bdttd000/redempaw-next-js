@@ -1,4 +1,3 @@
-"use client";
 import logo from "@/public/assets/logo.svg";
 import Image from "next/image";
 import Form from "./form";

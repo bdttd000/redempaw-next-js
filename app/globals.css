@@ -59,3 +59,7 @@ body {
   letter-spacing: 0.1rem;
   text-align: center;
 }
+
+.grey-bg {
+  background-color: #262626;
+}
