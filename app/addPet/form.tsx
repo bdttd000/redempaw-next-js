@@ -5,8 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { Input, Submit, InputFile, InputFiles, Textarea } from "@/components";
 import { city } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "next/navigation";
 
 const Form = () => {
+  const router = useRouter();
   const [cities, setCities] = useState<city[]>();
   const [city, setCity] = useState<string | null>(null);
   const [avatar, setMainImage] = useState<File>();
@@ -21,8 +23,8 @@ const Form = () => {
     description: "",
     city: "",
     pet_info_id: "",
-    directoryUrl: "",
-    avatarUrl: "",
+    directory_url: "",
+    avatar_url: "",
     user_id: "",
   });
 
@@ -49,13 +51,13 @@ const Form = () => {
     e.preventDefault();
 
     const directory = uuidv4();
-    addPetData.directoryUrl = directory;
+    addPetData.directory_url = directory;
 
     const petInfoId = uuidv4();
     addPetData.pet_info_id = petInfoId;
 
     const avatarUrl = uuidv4();
-    addPetData.avatarUrl = avatarUrl;
+    addPetData.avatar_url = avatarUrl;
 
     console.log(addPetData);
     console.log(user);
@@ -71,12 +73,14 @@ const Form = () => {
     });
 
     if (avatar) {
-      await uploadImage(avatar, directory);
+      await uploadImage(avatar, directory, addPetData.avatar_url);
     }
 
     for (const image of additional_images) {
       await uploadImage(image, directory);
     }
+
+    router.push("/");
   };
 
   const handleInputChange = (
@@ -86,9 +90,13 @@ const Form = () => {
     setAddPetData((prevData: any) => ({ ...prevData, [name]: value }));
   };
 
-  const uploadImage = async (image: File, directory: string) => {
+  const uploadImage = async (
+    image: File,
+    directory: string,
+    avatar_url?: string
+  ) => {
     const data = new FormData();
-    const imageId = uuidv4();
+    const imageId = avatar_url ?? uuidv4();
 
     data.append("file", image);
     data.append("imageId", imageId);
@@ -191,7 +199,7 @@ const Form = () => {
       <Input
         type="text"
         name="name"
-        placeholder="Podaj swoje imię"
+        placeholder="Podaj imię zwierzaka"
         value={addPetData.name}
         onChange={handleInputChange}
       />
@@ -199,7 +207,7 @@ const Form = () => {
       <Textarea
         name="description"
         onChange={handleInputChange}
-        placeholder="Wprowadź opis"
+        placeholder="Opisz go w kilku zdaniach"
       />
 
       <Submit text="DODAJ ZWIERZAKA" />

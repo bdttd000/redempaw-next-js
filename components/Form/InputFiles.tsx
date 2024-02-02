@@ -6,7 +6,7 @@ const InputFile: React.FC<{ text: string; name: string; onChange: any }> = ({
   onChange,
 }) => {
   return (
-    <div className="mb-3 w-96">
+    <div className="mb-3 sm:w-96">
       <label
         htmlFor="formFile"
         className="mb-2 inline-block text-neutral-700 dark:text-neutral-200"

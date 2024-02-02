@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import HomeContent from "./HomeContent";
+import PageContent from "./pageContent";
 
-const Home = async () => {
+const Page = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -12,9 +12,9 @@ const Home = async () => {
 
   return (
     <>
-      <HomeContent />
+      <PageContent />
     </>
   );
 };
 
-export default Home;
+export default Page;

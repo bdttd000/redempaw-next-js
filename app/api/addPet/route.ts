@@ -1,6 +1,5 @@
 import prisma from "@/prisma/db";
 import { NextResponse } from "next/server";
-import { v4 as uuidv4 } from "uuid";
 
 export async function POST(req: Request) {
   try {
@@ -19,7 +18,7 @@ export async function POST(req: Request) {
 
     const createdPet = await prisma.pet.create({
       data: {
-        user_id: "014b5fb4-3fe1-48cb-91dd-e5e17d7f1e54",
+        user_id: "e726d500-5aa6-4637-b016-9888942712cd",
         pet_info_id: createdPetInfo.pet_info_id,
       },
     });
