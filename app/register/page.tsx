@@ -2,8 +2,17 @@
 import logo from "@/public/assets/logo.svg";
 import Image from "next/image";
 import Form from "./form";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-const page = () => {
+const page = async () => {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/");
+  }
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row p-5 gap-8">
       <div className="md:flex-1 flex flex-col justify-center items-center">

@@ -11,18 +11,22 @@
   "dependencies": {
     "@prisma/client": "^5.6.0",
     "debug": "^4.3.4",
+    "jsonwebtoken": "^9.0.2",
     "next": "13.5.4",
+    "next-auth": "^4.24.5",
     "react": "^18",
     "react-axios": "^2.0.6",
     "react-dom": "^18",
     "supports-color": "^8.1.1"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/uuid": "^9.0.8",
     "autoprefixer": "^10",
+    "bcryptjs": "^2.4.3",
     "postcss": "^8",
     "prisma": "^5.6.0",
     "tailwindcss": "^3",

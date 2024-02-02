@@ -1,6 +1,6 @@
 import prisma from "@/prisma/db";
 import { NextResponse } from "next/server";
-import hash256 from "@/utils/hash";
+import { hash } from "bcryptjs";
 
 export async function POST(req: Request) {
   try {
@@ -21,6 +21,8 @@ export async function POST(req: Request) {
       );
     }
 
+    const passwordHash = await hash(password1, 12);
+
     const createUser = await prisma.users.create({
       data: {
         privilege: {
@@ -35,7 +37,7 @@ export async function POST(req: Request) {
           },
         },
         email: email,
-        password: hash256(password1),
+        password: passwordHash,
       },
     });
 

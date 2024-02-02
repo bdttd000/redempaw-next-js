@@ -1,13 +1,15 @@
-import { randomUUID } from "crypto";
-import React from "react";
-import prisma from "@/prisma/db";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { Footer, Header } from "@/components/Layout";
 
-const users = await prisma.users.findMany();
+export default async function Home() {
+  const session = await getServerSession(authOptions);
 
-const page = () => {
-  const uuid = randomUUID();
+  return (
+    <main className="min-h-screen">
+      <Header />
 
-  return <div>{uuid}</div>;
-};
-
-export default page;
+      <Footer />
+    </main>
+  );
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { city } from "@prisma/client";
 import { Input, Redirect, Submit } from "@/components";
-import { redirect } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const Form = () => {
   const [cities, setCities] = useState<city[]>();
@@ -41,7 +41,7 @@ const Form = () => {
     }
 
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch("/api/createUser", {
         method: "POST",
         body: JSON.stringify({
           ...registerData,
@@ -50,11 +50,12 @@ const Form = () => {
           "Content-Type": "application/json",
         },
       });
-      if (res.ok) {
-        redirect("/login");
-      } else {
+      if (!res.ok) {
         setError((await res.json()).error);
+        return;
       }
+
+      signIn(undefined, { callbackUrl: "/" });
     } catch (error: any) {
       setError(error?.message);
     }
