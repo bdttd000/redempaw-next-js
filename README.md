@@ -11,20 +11,11 @@ Stworzenie aplikacji pozwalającej użytkownikom przeglądaj, jak i tworzyć og�
 - wylogowywanie
 - przeglądanie aktualnych wpisów
 - wyświelenie jednego wpisu
-- wyszukanie wpisów w zależności od miasta
 - dodanie wpisu
-
-## DIAGRAM UML KLAS:
-
-![diagram-uml](readme_files/diagram-uml.png)
 
 ## DIAGRAM ERD BAZY:
 
 ![diagram-erd](readme_files/diagram-erd.png)
-
-## STRUKTURA FOLDERÓW:
-
-![folder-flow](readme_files/folder-flow.png)
 
 ## FIGMA:
 
