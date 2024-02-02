@@ -11,8 +11,8 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-start-rgb: 41, 204, 0;
+    --background-end-rgb: 15, 48, 1;
   }
 }
 
@@ -24,4 +24,38 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.primary-bg {
+  background-color: #29CC00;
+}
+
+.primary-color {
+  color: #29CC00;
+}
+
+.secondary-bg {
+  background-color: #0F4801;
+}
+
+.secondary-color {
+  color: #0F4801;
+}
+
+.light-bg {
+  background-color: #77B867;
+}
+
+.light-color {
+  color: #77B867;
+}
+
+.brown-color {
+  color: #80361E;
+}
+
+.input-font {
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  text-align: center;
 }
